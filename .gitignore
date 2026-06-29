@@ -1,0 +1,26 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+.env
+
+# dbt
+target/
+dbt_packages/
+logs/
+retail_dbt/target/
+retail_dbt/dbt_packages/
+retail_dbt/logs/
+
+# Credentials - never commit these
+*.json
+!package.json
+service-account*.json
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/
+.idea/

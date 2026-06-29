@@ -1,0 +1,9 @@
+version: 2
+
+sources:
+  - name: retail_analytics
+    database: retail-stream-pipeline
+    schema: retail_analytics
+    tables:
+      - name: orders
+      - name: order_items
