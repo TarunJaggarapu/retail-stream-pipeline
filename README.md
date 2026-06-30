@@ -85,6 +85,20 @@ group by date(order_date)
 order by order_day desc
 \`\`\`
 
+## BigQuery Data Model
+
+![BigQuery Schema](docs/bigquery_schema.png)
+
+**Raw layer** (`retail_analytics`) — streaming data landed directly from Dataflow:
+- `orders`
+- `order_items`
+
+**dbt-modeled layer** (`retail_analytics_dbt`) — transformed star schema:
+- `stg_orders`, `stg_order_items` — staging views
+- `dim_customers`, `dim_products` — dimension tables
+- `fact_orders` — fact table
+- `kpi_daily_revenue`, `kpi_top_products`, `kpi_category_revenue` — analytics-ready KPI tables
+
 ## Standalone SQL Examples
 
 In addition to dbt models, `sql/analysis_queries.sql` contains standalone analytical queries demonstrating:
