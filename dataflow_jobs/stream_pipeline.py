@@ -92,9 +92,9 @@ def run():
     gcp_options = options.view_as(GoogleCloudOptions)
     gcp_options.project = PROJECT_ID
     gcp_options.region = "us-west1"
-    gcp_options.staging_location = "gs://retail-stream-pipeline-bucket-east/staging"
-    gcp_options.temp_location = "gs://retail-stream-pipeline-bucket-east/temp"
-    gcp_options.job_name = "retail-stream-job-3"
+    gcp_options.job_name = "retail-stream-job-final"
+    gcp_options.staging_location = "gs://retail-stream-pipeline-bucket-west/staging"
+    gcp_options.temp_location = "gs://retail-stream-pipeline-bucket-west/temp"
 
     worker_options = options.view_as(WorkerOptions)
     worker_options.machine_type = "e2-medium"

@@ -71,6 +71,12 @@ Live dashboard connected to BigQuery showing:
 
 ![Dashboard](docs/dashboard_screenshot.png)
 
+## Dataflow Job Execution
+
+![Dataflow Job Graph](docs/dataflow_job_graph.png)
+
+Pipeline executed on Google Cloud Dataflow with `DataflowRunner`, processing live order events from Pub/Sub with sub-second operation latency across all transformation stages.
+
 ## Project Setup
 
 ### Prerequisites
