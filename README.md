@@ -58,6 +58,42 @@ kpi_daily_revenue
 kpi_top_products
 kpi_category_revenue
 
+## SQL & Data Modeling
+
+The dbt layer is built entirely on SQL, implementing a star schema design:
+
+**Staging layer** — cleans and standardizes raw streaming data types (timestamps, casting)
+
+**Dimension tables** — `dim_customers`, `dim_products` built using `DISTINCT` selections from staging models
+
+**Fact table** — `fact_orders` joins order-level data with aggregated order item metrics using `LEFT JOIN` and `GROUP BY`
+
+**KPI models** — analytical SQL queries using aggregations (`SUM`, `AVG`, `COUNT DISTINCT`) and `GROUP BY` to answer business questions:
+- Daily revenue trends
+- Top performing products by revenue
+- Revenue breakdown by category
+
+Example KPI query (`kpi_daily_revenue.sql`):
+\`\`\`sql
+select
+    date(order_date) as order_day,
+    count(distinct order_id) as total_orders,
+    sum(total_amount_usd) as total_revenue_usd,
+    avg(total_amount_usd) as avg_order_value_usd
+from {{ ref('fact_orders') }}
+group by date(order_date)
+order by order_day desc
+\`\`\`
+
+## Standalone SQL Examples
+
+In addition to dbt models, `sql/analysis_queries.sql` contains standalone analytical queries demonstrating:
+- Window functions (`LAG`, `SUM() OVER`) for trend and cumulative analysis
+- Percentage-of-total calculations
+- Multi-dimension aggregations (customer, city, product level)
+
+These queries can be run directly against the dbt-modeled tables in BigQuery.
+
 ### 4. Looker Studio Dashboard
 Live dashboard connected to BigQuery showing:
 - Total Revenue (USD)
